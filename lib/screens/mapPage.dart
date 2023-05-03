@@ -62,25 +62,29 @@ class _MapScreenState extends State<MapScreen> {
       appBar: AppBar(
         title: const Text('Map Screen'),
       ),
-      body: GoogleMap(
-        onMapCreated: _onMapCreated,
-        markers: _markers,
-        initialCameraPosition: CameraPosition(
-          target: _center,
-          zoom: 10.0,
+      body: SizedBox(
+        height: 400,
+        width: 300,
+        child: GoogleMap(
+          onMapCreated: _onMapCreated,
+          markers: _markers,
+          initialCameraPosition: CameraPosition(
+            target: _center,
+            zoom: 10.0,
+          ),
+          onTap: (LatLng position) {
+            setState(() {
+              _currentLatLng = position;
+              _markers.clear();
+              _markers.add(Marker(
+                markerId: MarkerId(_currentLatLng.toString()),
+                position: _currentLatLng!,
+                draggable: true,
+                onDragEnd: _onMarkerDragEnd,
+              ));
+            });
+          },
         ),
-        onTap: (LatLng position) {
-          setState(() {
-            _currentLatLng = position;
-            _markers.clear();
-            _markers.add(Marker(
-              markerId: MarkerId(_currentLatLng.toString()),
-              position: _currentLatLng!,
-              draggable: true,
-              onDragEnd: _onMarkerDragEnd,
-            ));
-          });
-        },
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {

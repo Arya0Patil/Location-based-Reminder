@@ -41,6 +41,10 @@ dependencies:
   sqflite: ^2.2.6
   shared_preferences: ^2.0.18
   geolocator: ^9.0.2
+  provider: ^6.0.5
+  http: ^0.13.6
+  another_flushbar: ^1.12.29
+  path_provider: ^2.0.14
 
 dev_dependencies:
   flutter_test:
